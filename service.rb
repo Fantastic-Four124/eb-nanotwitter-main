@@ -50,6 +50,9 @@ get '/loaderio-5026e65eed1dbb67971ba6671d1760fe.txt' do
   send_file 'loaderio-5026e65eed1dbb67971ba6671d1760fe.txt'
 end
 
+get '/loaderio-4cb8e3e2b3bbc621379e0973e4802a54.txt' do
+  send_file 'loaderio-4cb8e3e2b3bbc621379e0973e4802a54.txt'
+end
 
 get '/loaderio-c1de10acb26fb559a7ee2d14a50fc37f.txt' do
   send_file 'loaderio-c1de10acb26fb559a7ee2d14a50fc37f.txt'
