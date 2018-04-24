@@ -13,8 +13,11 @@ require 'rest-client'
 
 configure do
 #  REDISTOGO_URL = "redis://localhost:6379/"
+  TEST_INTERFACE_URL = 'https://fierce-garden-41263.herokuapp.com'
   PUBLIC_REDIS_URL = 'redis://rediscloud:FEtS3Muv7bSjHnOIqfK2hycHfxUm5qIG@redis-15517.c14.us-east-1-3.ec2.cloud.redislabs.com:15517'
 #  MY_REDIS_URL = 'redis://h:p9dd6b325e2530743e01f5b5c7b639bcff92827007e3f590e2015c2af0cc9edc9@ec2-35-173-148-122.compute-1.amazonaws.com:23559'
+  PREFIX_TWEET_R_SERVICE = 'https://nt-tweet-reader.herokuapp.com/'  
+  PREFIX_TWEET_W_SERVICE = "https://nt-tweet-writer.herokuapp.com"
   uri = URI.parse(PUBLIC_REDIS_URL)
   $redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   PREFIX = 'api/v1'
@@ -92,5 +95,54 @@ get '/:token/users/:id/timeline' do
 end
 
 get '/:token/users/:id/feed' do
+end
+
+
+# TEST INTERFACE
+
+# Delete everything and recreate testuser
+post '/test/reset/all' do
+  response = RestClient.post TEST_INTERFACE_URL + '/test/reset/all', ''
+  response.body
+end
+
+# Load the test seed data
+post '/test/reset/standard?' do
+  response = RestClient.post TEST_INTERFACE_URL + '/test/reset/standard?', params
+  response.body
+end
+
+# See that the state is what you expect
+get '/test/status' do 
+  response = RestClient.get TEST_INTERFACE_URL + '/test/status'
+  response.body
+end 
+
+# create “u” new users, 10 tweets each
+post '/test/users/create?' do 
+  response = RestClient.post TEST_INTERFACE_URL + '/test/users/create?', params
+  response.body
+end
+
+# have testuser tweet “t” times
+post '/test/user/:user/tweets?' do  
+  response = RestClient.post TEST_INTERFACE_URL + '/test/user/:user/tweets?', params
+  response.body
+end
+
+# have f users follow testuser
+post '/test/user/:user/follows?' do
+  response = RestClient.post TEST_INTERFACE_URL + '/test/user/:user/follows?', params
+  response.body
+end
+
+get '/user/testuser' do
+  response = RestClient.get(PREFIX_TWEET_R_SERVICE + "/api/v1/testuser/users/3456/timeline")
+  response.body
+end
+
+post '/user/testuser/tweet' do
+  jsonmsg = { "username": 'testuser', "id": 3456, "time": '', 'tweet-input': 'This is a test tweet!' }
+  RestClient.post PREFIX_TWEET_W_SERVICE + '/testing/tweets/new', jsonmsg
 end
 
