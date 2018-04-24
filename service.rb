@@ -24,6 +24,9 @@ configure do
   TWEET_SERVICE_URL = 'https://boiling-castle-61613.herokuapp.com'
   TWEETS = 'tweets'
   RECENT = 'recent'
+  TIMELINE = 'timeline'
+  TEST_USER = 'testuser'
+  USERS = 'users'
 end
 
 enable :sessions
@@ -59,43 +62,51 @@ get '/bundle.js' do
   send_file 'bundle.js'
 end
 
-post '/users/register' do
-end
+#post '/users/register' do
+#end
+#
+#post '/login' do
+#end
+#
+#post '/:token/logout' do
+#end
+#
+#get '/:token/users/:id' do
+#end
+#
+#post '/:token/users/:id/follow' do
+#end
+#
+#post '/:token/users/:id/unfollow' do
+#end
+#
+#get '/:token/users/:id/leader-list' do
+#end
+#
+#get '/:token/users/:id/follower-list' do
+#end
+#
+#post '/:token/tweets/new' do
+#end
 
-post '/login' do
-end
-
-post '/:token/logout' do
-end
-
-get '/:token/users/:id' do
-end
-
-post '/:token/users/:id/follow' do
-end
-
-post '/:token/users/:id/unfollow' do
-end
-
-get '/:token/users/:id/leader-list' do
-end
-
-get '/:token/users/:id/follower-list' do
-end
-
-post '/:token/tweets/new' do
-end
+#get '/users/:id' do
+#  url = TWEET_SERVICE_URL + '/' + PREFIX + '/' + TEST_USER + '/' + USERS + '/' + params['id'] + '/' + TIMELINE
+#    RestClient.get url, {}
+#end
 
 get '/tweets/recent' do
   url = TWEET_SERVICE_URL + '/' + PREFIX + '/' + TWEETS + '/' + RECENT
     RestClient.get url, {}
 end
 
-get '/:token/users/:id/timeline' do
-end
+#post ''
+#end
 
-get '/:token/users/:id/feed' do
-end
+##get '/:token/users/:id/timeline' do
+##end
+##
+##get '/:token/users/:id/feed' do
+##end
 
 
 # TEST INTERFACE
