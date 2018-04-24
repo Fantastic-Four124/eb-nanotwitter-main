@@ -21,7 +21,7 @@ configure do
   uri = URI.parse(PUBLIC_REDIS_URL)
   $redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   PREFIX = 'api/v1'
-  TWEET_SERVICE_URL = 'https://nt-tweet-reader.herokuapp.com/'
+  TWEET_SERVICE_URL = 'https://nt-tweet-reader.herokuapp.com'
   TWEETS = 'tweets'
   RECENT = 'recent'
   TIMELINE = 'timeline'
