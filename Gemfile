@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.5.0"
+ruby "2.5.1"
 
 gem 'sinatra'
 gem 'sinatra-cross_origin'
@@ -16,3 +16,4 @@ gem 'redis-sinatra'
 gem 'sinatra-cors'
 gem 'bunny'
 gem 'rest-client'
+gem 'puma'
