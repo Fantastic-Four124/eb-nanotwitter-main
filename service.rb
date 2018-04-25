@@ -9,15 +9,11 @@ require 'securerandom'
 require 'bunny'
 require 'json'
 require 'rest-client'
+require 'newrelic_rpm'
 
 
 configure do
-#  REDISTOGO_URL = "redis://localhost:6379/"
   TEST_INTERFACE_URL = 'https://fierce-garden-41263.herokuapp.com'
-#  PUBLIC_REDIS_URL = 'redis://rediscloud:FEtS3Muv7bSjHnOIqfK2hycHfxUm5qIG@redis-15517.c14.us-east-1-3.ec2.cloud.redislabs.com:15517'
-#  MY_REDIS_URL = 'redis://h:p9dd6b325e2530743e01f5b5c7b639bcff92827007e3f590e2015c2af0cc9edc9@ec2-35-173-148-122.compute-1.amazonaws.com:23559'
-#  uri = URI.parse(PUBLIC_REDIS_URL)
-#  $redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   PREFIX = 'api/v1'
   TWEET_SERVICE_URL = 'https://nt-tweet-reader.herokuapp.com'
   TWEETS = 'tweets'
@@ -25,9 +21,11 @@ configure do
   TIMELINE = 'timeline'
   TEST_USER = 'testuser'
   USERS = 'users'
-#  $bundle = File.read('bundle.js')
 end
 
+onfigure :production do
+ require 'newrelic_rpm'
+end
 
 set :allow_origin, '*'
 set :allow_methods, 'GET,HEAD,POST'
