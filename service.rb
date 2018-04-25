@@ -99,21 +99,30 @@ end
 #end
 
 get '/tweets/recent' do
-  $tweet_redis.with do |tweet_redis|
-    if tweet_redis.llen("recent") > 0
-      if rand(2) == 1
-        return tweet_redis.lrange("recent", 0, -1).to_json
-      else
-        $tweet_redis_spare.with do |tweet_redis_spare|
-          return tweet_redis_spare.lrange("recent", 0, -1).to_json
-        end
-      end
-    else
-      url = TWEET_SERVICE_URL + '/' + PREFIX + '/' + TWEETS + '/' + RECENT
-      return RestClient.get url, {}
+  if rand(2) == 1
+    $tweet_redis.with do |tweet_redis|
+      return tweet_redis.lrange("recent", 0, -1).to_json
     end
-    # some redis operations
+  else
+    $tweet_redis_spare.with do |tweet_redis_spare|
+      return tweet_redis_spare.lrange("recent", 0, -1).to_json
+    end
   end
+#  $tweet_redis.with do |tweet_redis|
+##    if tweet_redis.llen("recent") > 0
+#      if rand(2) == 1
+#        return tweet_redis.lrange("recent", 0, -1).to_json
+#      else
+#        $tweet_redis_spare.with do |tweet_redis_spare|
+#          return tweet_redis_spare.lrange("recent", 0, -1).to_json
+#        end
+#      end
+#    else
+#      url = TWEET_SERVICE_URL + '/' + PREFIX + '/' + TWEETS + '/' + RECENT
+#      return RestClient.get url, {}
+#    end
+    # some redis operations
+#  end
   {err: true}.to_json
 end
 
