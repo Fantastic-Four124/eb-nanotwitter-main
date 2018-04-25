@@ -65,8 +65,7 @@ get '/78cc6f9c2e98cf61/bundle.js' do
 end
 
 get '/bundle.js' do
-#  $bundle
-  send_file 'bundle.js'
+  $bundle
 end
 
 #post '/users/register' do
@@ -102,8 +101,17 @@ end
 #end
 
 get '/tweets/recent' do
-  url = TWEET_SERVICE_URL + '/' + PREFIX + '/' + TWEETS + '/' + RECENT
-    RestClient.get url, {}
+  if $tweet_redis.llen("recent") > 0
+    if rand(2) == 1
+      return $tweet_redis.lrange("recent", 0, -1).to_json
+    else
+      return $tweet_redis_spare.lrange("recent", 0, -1).to_json
+    end
+  else
+    url = TWEET_SERVICE_URL + '/' + PREFIX + '/' + TWEETS + '/' + RECENT
+    return RestClient.get url, {}
+  end
+  {err: true}.to_json
 end
 
 #post ''
