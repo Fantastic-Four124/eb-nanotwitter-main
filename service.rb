@@ -65,8 +65,8 @@ get '/78cc6f9c2e98cf61/bundle.js' do
 end
 
 get '/bundle.js' do
-  $bundle
-#  send_file 'bundle.js'
+#  $bundle
+  send_file 'bundle.js'
 end
 
 #post '/users/register' do
