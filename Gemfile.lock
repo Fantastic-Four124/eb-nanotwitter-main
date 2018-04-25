@@ -29,6 +29,7 @@ GEM
     minitest (5.11.3)
     mustermann (1.0.2)
     netrc (0.11.0)
+    newrelic_rpm (5.0.0.342)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -74,6 +75,7 @@ DEPENDENCIES
   byebug
   connection_pool
   faker
+  newrelic_rpm
   pry-byebug
   puma
   rack
