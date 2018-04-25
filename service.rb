@@ -27,6 +27,7 @@ configure do
   TIMELINE = 'timeline'
   TEST_USER = 'testuser'
   USERS = 'users'
+  $bundle = File.read('bundle.js')
 end
 
 enable :sessions
@@ -67,7 +68,8 @@ get '/78cc6f9c2e98cf61/bundle.js' do
 end
 
 get '/bundle.js' do
-  send_file 'bundle.js'
+  $bundle
+#  send_file 'bundle.js'
 end
 
 #post '/users/register' do
