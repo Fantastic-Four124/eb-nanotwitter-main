@@ -23,7 +23,7 @@ configure do
   USERS = 'users'
 end
 
-onfigure :production do
+configure :production do
  require 'newrelic_rpm'
 end
 
