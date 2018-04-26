@@ -9,7 +9,6 @@ require 'securerandom'
 require 'bunny'
 require 'json'
 require 'rest-client'
-require 'newrelic_rpm'
 
 
 configure do
@@ -24,9 +23,6 @@ configure do
   USERS = 'users'
 end
 
-configure :production do
- require 'newrelic_rpm'
-end
 
 set :allow_origin, '*'
 set :allow_methods, 'GET,HEAD,POST'
