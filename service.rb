@@ -78,10 +78,10 @@ get '/tweets/recent' do
     $tweet_redis_2.with do |redis_conn|
       return redis_conn.lrange("recent", 0, -1).to_json
     end
- # when 2
- #   $tweet_redis_3.with do |redis_conn|
- #     return redis_conn.lrange("recent", 0, -1).to_json
- #   end
+  when 2
+    $tweet_redis_3.with do |redis_conn|
+      return redis_conn.lrange("recent", 0, -1).to_json
+    end
   else
     'Whoops'
   end
@@ -142,7 +142,8 @@ end
 
 # have testuser tweet “t” times
 post '/test/user/:user/tweets?' do  
-  response = RestClient.post TEST_INTERFACE_URL + '/test/user/:user/tweets?', params
+  user = params['user']
+  response = RestClient.post TEST_INTERFACE_URL + '/test/user/' + user + '/tweets?', params
   response.body
 end
 
@@ -153,6 +154,32 @@ post '/test/user/:user/follows?' do
 end
 
 get '/user/testuser' do
+  redis_num = rand(2)
+  case redis_num
+  when 0
+    $tweet_redis_1.with do |redis_conn|
+      user_tweets = $tweet_redis_1.lrange("3456_feed", 0, -1)
+      if user_tweets.length > 0
+        return user_tweets.to_json
+      end
+    end
+  when 1
+    $tweet_redis_2.with do |redis_conn|
+      user_tweets = $tweet_redis_2.lrange("3456_feed", 0, -1)
+      if user_tweets.length > 0
+        return user_tweets.to_json
+      end
+    end
+  when 2
+    $tweet_redis_3.with do |redis_conn|
+      user_tweets = $tweet_redis_3.lrange("3456_feed", 0, -1)
+      if user_tweets.length > 0
+        return user_tweets.to_json
+      end
+    end
+  else
+    'Whoops'
+  end
   response = RestClient.get(PREFIX_TWEET_R_SERVICE + "/api/v1/testuser/users/3456/timeline")
   response.body
 end
