@@ -73,23 +73,23 @@ get '/tweets/recent' do
   case redis_num
   when 0
     $tweet_redis_1.with do |redis_conn|
-      tweets = redis_conn.lrange("recent", 0, -1).to_json
+      tweets = redis_conn.lrange("recent", 0, -1)
       if tweets.length != 0
-        return tweets
+        return tweets.to_json
       end
     end
   when 1
     $tweet_redis_2.with do |redis_conn|
-      tweets = redis_conn.lrange("recent", 0, -1).to_json
+      tweets = redis_conn.lrange("recent", 0, -1)
       if tweets.length != 0
-        return tweets
+        return tweets.to_json
       end
     end
   when 2
     $tweet_redis_3.with do |redis_conn|
-      tweets = redis_conn.lrange("recent", 0, -1).to_json
+      tweets = redis_conn.lrange("recent", 0, -1)
       if tweets.length != 0
-        return tweets
+        return tweets.to_json
       end
     end
   end
