@@ -68,7 +68,7 @@ end
 
 get '/tweets/recent' do
   #$redis_num = ($redis_num + 1) % 3
-  redis_num = rand(3)
+  redis_num = rand(2)
   case redis_num
   when 0
     $tweet_redis_1.with do |redis_conn|
@@ -78,10 +78,10 @@ get '/tweets/recent' do
     $tweet_redis_2.with do |redis_conn|
       return redis_conn.lrange("recent", 0, -1).to_json
     end
-  when 2
-    $tweet_redis_3.with do |redis_conn|
-      return redis_conn.lrange("recent", 0, -1).to_json
-    end
+ # when 2
+ #   $tweet_redis_3.with do |redis_conn|
+ #     return redis_conn.lrange("recent", 0, -1).to_json
+ #   end
   else
     'Whoops'
   end
