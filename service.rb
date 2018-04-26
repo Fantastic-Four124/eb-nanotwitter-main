@@ -66,42 +66,10 @@ get '/bundle.js' do
   $bundle
 end
 
-#post '/users/register' do
-#end
-#
-#post '/login' do
-#end
-#
-#post '/:token/logout' do
-#end
-#
-#get '/:token/users/:id' do
-#end
-#
-#post '/:token/users/:id/follow' do
-#end
-#
-#post '/:token/users/:id/unfollow' do
-#end
-#
-#get '/:token/users/:id/leader-list' do
-#end
-#
-#get '/:token/users/:id/follower-list' do
-#end
-#
-#post '/:token/tweets/new' do
-#end
-
-#get '/users/:id' do
-#  url = TWEET_SERVICE_URL + '/' + PREFIX + '/' + TEST_USER + '/' + USERS + '/' + params['id'] + '/' + TIMELINE
-#    RestClient.get url, {}
-#end
-
 get '/tweets/recent' do
-  $redis_num = ($redis_num + 1) % 3
-  puts $redis_num
-  case $redis_num
+  #$redis_num = ($redis_num + 1) % 3
+  redis_num = rand(3)
+  case redis_num
   when 0
     $tweet_redis_1.with do |redis_conn|
       return redis_conn.lrange("recent", 0, -1).to_json
