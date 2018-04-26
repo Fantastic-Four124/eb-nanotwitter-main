@@ -16,6 +16,7 @@ configure do
   TEST_INTERFACE_URL = 'https://fierce-garden-41263.herokuapp.com'
   PREFIX = 'api/v1'
   TWEET_SERVICE_URL = 'https://nt-tweet-reader.herokuapp.com'
+  TWEET_READER_URL = 'https://nt-tweet-writer.herokuapp.com'
   TWEETS = 'tweets'
   RECENT = 'recent'
   TIMELINE = 'timeline'
@@ -68,23 +69,23 @@ end
 
 get '/tweets/recent' do
   #$redis_num = ($redis_num + 1) % 3
-#  redis_num = rand(2)
-#  case redis_num
-#  when 0
-#    $tweet_redis_1.with do |redis_conn|
-#      return redis_conn.lrange("recent", 0, -1).to_json
-#    end
-#  when 1
-#    $tweet_redis_2.with do |redis_conn|
-#      return redis_conn.lrange("recent", 0, -1).to_json
-#    end
-#  when 2
-#    $tweet_redis_3.with do |redis_conn|
-#      return redis_conn.lrange("recent", 0, -1).to_json
-#    end
-#  else
-#    'Whoops'
-#  end
+  redis_num = rand(3)
+  case redis_num
+  when 0
+    $tweet_redis_1.with do |redis_conn|
+      return redis_conn.lrange("recent", 0, -1).to_json
+    end
+  when 1
+    $tweet_redis_2.with do |redis_conn|
+      return redis_conn.lrange("recent", 0, -1).to_json
+    end
+  when 2
+    $tweet_redis_3.with do |redis_conn|
+      return redis_conn.lrange("recent", 0, -1).to_json
+    end
+  else
+    'Whoops'
+  end
 
 #  $tweet_redis.with do |tweet_redis|
 ##    if tweet_redis.llen("recent") > 0
@@ -187,6 +188,6 @@ end
 
 post '/user/testuser/tweet' do
   jsonmsg = { "username": 'testuser', "id": 3456, "time": '', 'tweet-input': 'This is a test tweet!' }
-  RestClient.post PREFIX_TWEET_W_SERVICE + '/testing/tweets/new', jsonmsg
+  RestClient.post TWEET_WRITER_URL + '/testing/tweets/new', jsonmsg
 end
 
