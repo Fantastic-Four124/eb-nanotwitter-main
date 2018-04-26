@@ -16,7 +16,7 @@ configure do
   TEST_INTERFACE_URL = 'https://fierce-garden-41263.herokuapp.com'
   PREFIX = 'api/v1'
   TWEET_SERVICE_URL = 'https://nt-tweet-reader.herokuapp.com'
-  TWEET_READER_URL = 'https://nt-tweet-writer.herokuapp.com'
+  TWEET_WRITER_URL = 'https://nt-tweet-writer.herokuapp.com'
   TWEETS = 'tweets'
   RECENT = 'recent'
   TIMELINE = 'timeline'
