@@ -59,6 +59,10 @@ get '/loaderio-34f40d88339b25f6c5921bd93a6604ad.txt' do
   send_file 'loaderio-34f40d88339b25f6c5921bd93a6604ad.txt'
 end
 
+get '/loaderio-cdeae1ba221d7f8d0412bea9949dfd43.txt' do
+  send_file 'loaderio-cdeae1ba221d7f8d0412bea9949dfd43.txt'
+end
+
 get '/' do
   render :html, :index
 end
