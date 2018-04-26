@@ -100,6 +100,7 @@ end
 
 get '/tweets/recent' do
   $redis_num = ($redis_num + 1) % 3
+  puts $redis_num
   case $redis_num
   when 0
     $tweet_redis_1.with do |redis_conn|
