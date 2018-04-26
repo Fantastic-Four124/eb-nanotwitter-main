@@ -73,36 +73,28 @@ get '/tweets/recent' do
   case redis_num
   when 0
     $tweet_redis_1.with do |redis_conn|
-      return redis_conn.lrange("recent", 0, -1).to_json
+      tweets = redis_conn.lrange("recent", 0, -1).to_json
+      if tweet.length != 0
+        return tweets
+      end
     end
   when 1
     $tweet_redis_2.with do |redis_conn|
-      return redis_conn.lrange("recent", 0, -1).to_json
+      tweets = redis_conn.lrange("recent", 0, -1).to_json
+      if tweet.length != 0
+        return tweets
+      end
     end
   when 2
     $tweet_redis_3.with do |redis_conn|
-      return redis_conn.lrange("recent", 0, -1).to_json
+      tweets = redis_conn.lrange("recent", 0, -1).to_json
+      if tweet.length != 0
+        return tweets
+      end
     end
-  else
-    'Whoops'
   end
-
-#  $tweet_redis.with do |tweet_redis|
-##    if tweet_redis.llen("recent") > 0
-#      if rand(2) == 1
-#        return tweet_redis.lrange("recent", 0, -1).to_json
-#      else
-#        $tweet_redis_spare.with do |tweet_redis_spare|
-#          return tweet_redis_spare.lrange("recent", 0, -1).to_json
-#        end
-#      end
-#    else
-#      url = TWEET_SERVICE_URL + '/' + PREFIX + '/' + TWEETS + '/' + RECENT
-#      return RestClient.get url, {}
-#    end
-    # some redis operations
-#  end
-  {err: true}.to_json
+  url = TWEET_SERVICE_URL + '/' + PREFIX + '/' + TWEETS + '/' + RECENT
+  RestClient.get url, {}
 end
 
 #post ''

@@ -55,3 +55,18 @@
 [2018-04-25 22:25:42 -0400 arch (30926)] INFO : Installing Net instrumentation
 [2018-04-25 22:25:42 -0400 arch (30926)] INFO : Finished instrumentation
 [2018-04-25 22:25:42 -0400 arch (30926)] INFO : Doing deferred dependency-detection before Rack startup
+[2018-04-25 23:01:44 -0400 arch (2370)] INFO : Starting the New Relic agent version 5.0.0.342 in "development" environment.
+[2018-04-25 23:01:44 -0400 arch (2370)] INFO : To prevent agent startup add a NEW_RELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2018-04-25 23:01:44 -0400 arch (2370)] INFO : Reading configuration from config/newrelic.yml (/home/tcw/Scalability/nanotwitter_files/eb-nanotwitter)
+[2018-04-25 23:01:44 -0400 arch (2370)] INFO : Environment: development
+[2018-04-25 23:01:44 -0400 arch (2370)] INFO : No known dispatcher detected.
+[2018-04-25 23:01:44 -0400 arch (2370)] INFO : Application: My Application (Development)
+[2018-04-25 23:01:44 -0400 arch (2370)] INFO : Installing deferred Rack::Builder instrumentation
+[2018-04-25 23:01:44 -0400 arch (2370)] INFO : Installing Rack::Builder middleware instrumentation
+[2018-04-25 23:01:44 -0400 arch (2370)] INFO : Installing Bunny instrumentation
+[2018-04-25 23:01:44 -0400 arch (2370)] INFO : Installing Sinatra instrumentation
+[2018-04-25 23:01:44 -0400 arch (2370)] INFO : Installing Redis Instrumentation
+[2018-04-25 23:01:44 -0400 arch (2370)] INFO : Installing Net instrumentation
+[2018-04-25 23:01:44 -0400 arch (2370)] INFO : Finished instrumentation
+[2018-04-25 23:01:51 -0400 arch (2370)] INFO : Reporting to: https://rpm.newrelic.com/accounts/1960656/applications/51282544
+[2018-04-25 23:02:53 -0400 arch (2370)] INFO : Starting Agent shutdown
