@@ -12,10 +12,13 @@ rackup      DefaultRackup
 port        ENV['PORT']     || 3000
 environment ENV['RACK_ENV'] || 'development'
 
-tweet_uri = URI.parse(ENV["TWEET_REDIS_URL"])
-tweet_uri_spare = URI.parse(ENV['TWEET_REDIS_SPARE_URL'])
-$tweet_redis = ConnectionPool.new(size: 10) { Redis.new(:host => tweet_uri.host, :port => tweet_uri.port, :password => tweet_uri.password) }
-$tweet_redis_spare = ConnectionPool.new(size: 10) { Redis.new(:host => tweet_uri_spare.host, :port => tweet_uri_spare.port, :password => tweet_uri_spare.password) }
+tweet_uri_1 = URI.parse(ENV["TWEET_REDIS_URL"])
+tweet_uri_2 = URI.parse(ENV['TWEET_REDIS_SPARE_URL'])
+tweet_uri_3 = URI.parse(ENV['TWEET_REDIS_3'])
+$tweet_redis_1 = ConnectionPool.new(size: 10) { Redis.new(:host => tweet_uri_1.host, :port => tweet_uri_1.port, :password => tweet_uri_1.password) }
+$tweet_redis_2 = ConnectionPool.new(size: 10) { Redis.new(:host => tweet_uri_2.host, :port => tweet_uri_spare_2.port, :password => tweet_uri_2.password) }
+$tweet_redis_3 = ConnectionPool.new(size: 10) { Redis.new(:host => tweet_uri_3.host, :port => tweet_uri_2.port, :password => tweet_uri_3.password) }
+$redis_num = 0
 
 on_worker_boot do
   $bundle = File.read('bundle.js')
