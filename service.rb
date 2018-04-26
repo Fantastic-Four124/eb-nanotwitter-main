@@ -157,26 +157,29 @@ get '/user/testuser' do
   redis_num = rand(2)
   case redis_num
   when 0
-#    $tweet_redis_1.with do |redis_conn|
-      user_tweets = $tweet_redis_1.lrange("3456_feed", 0, -1)
+    $tweet_redis_1.with do |redis_conn|
+      user_tweets = redis_conn.lrange("3456_feed", 0, -1)
+     # user_tweets = $tweet_redis_1.lrange("3456_feed", 0, -1)
       if user_tweets.length > 0
         return user_tweets.to_json
       end
-#    end
+    end
   when 1
-#    $tweet_redis_2.with do |redis_conn|
-      user_tweets = $tweet_redis_2.lrange("3456_feed", 0, -1)
+    $tweet_redis_2.with do |redis_conn|
+      user_tweets = redis_conn.lrange("3456_feed", 0, -1)
+     # user_tweets = $tweet_redis_2.lrange("3456_feed", 0, -1)
       if user_tweets.length > 0
         return user_tweets.to_json
       end
-#    end
+    end
   when 2
-#    $tweet_redis_3.with do |redis_conn|
-      user_tweets = $tweet_redis_3.lrange("3456_feed", 0, -1)
+    $tweet_redis_3.with do |redis_conn|
+      user_tweets = redis_conn.lrange("3456_feed", 0, -1)
+     # user_tweets = $tweet_redis_3.lrange("3456_feed", 0, -1)
       if user_tweets.length > 0
         return user_tweets.to_json
       end
-#    end
+    end
   end
   response = RestClient.get(TWEET_SERVICE_URL + '/' + PREFIX + '/' + 'testuser/users/3456/feed')
   response.body
