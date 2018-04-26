@@ -177,10 +177,8 @@ get '/user/testuser' do
         return user_tweets.to_json
       end
     end
-  else
-    'Whoops'
   end
-  response = RestClient.get(PREFIX_TWEET_R_SERVICE + "/api/v1/testuser/users/3456/timeline")
+  response = RestClient.get(TWEET_SERVICE_URL + '/' + PREFIX + '/' + 'testuser/users/3456/feed')
   response.body
 end
 
