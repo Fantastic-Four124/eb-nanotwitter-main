@@ -55,7 +55,7 @@ get '/loaderio-c1de10acb26fb559a7ee2d14a50fc37f.txt' do
   send_file 'loaderio-c1de10acb26fb559a7ee2d14a50fc37f.txt'
 end
 
-get 'loaderio-34f40d88339b25f6c5921bd93a6604ad.txt' do
+get '/loaderio-34f40d88339b25f6c5921bd93a6604ad.txt' do
   send_file 'loaderio-34f40d88339b25f6c5921bd93a6604ad.txt'
 end
 
