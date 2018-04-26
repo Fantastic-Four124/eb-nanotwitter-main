@@ -68,23 +68,23 @@ end
 
 get '/tweets/recent' do
   #$redis_num = ($redis_num + 1) % 3
-  redis_num = rand(2)
-  case redis_num
-  when 0
-    $tweet_redis_1.with do |redis_conn|
-      return redis_conn.lrange("recent", 0, -1).to_json
-    end
-  when 1
-    $tweet_redis_2.with do |redis_conn|
-      return redis_conn.lrange("recent", 0, -1).to_json
-    end
-  when 2
-    $tweet_redis_3.with do |redis_conn|
-      return redis_conn.lrange("recent", 0, -1).to_json
-    end
-  else
-    'Whoops'
-  end
+#  redis_num = rand(2)
+#  case redis_num
+#  when 0
+#    $tweet_redis_1.with do |redis_conn|
+#      return redis_conn.lrange("recent", 0, -1).to_json
+#    end
+#  when 1
+#    $tweet_redis_2.with do |redis_conn|
+#      return redis_conn.lrange("recent", 0, -1).to_json
+#    end
+#  when 2
+#    $tweet_redis_3.with do |redis_conn|
+#      return redis_conn.lrange("recent", 0, -1).to_json
+#    end
+#  else
+#    'Whoops'
+#  end
 
 #  $tweet_redis.with do |tweet_redis|
 ##    if tweet_redis.llen("recent") > 0
