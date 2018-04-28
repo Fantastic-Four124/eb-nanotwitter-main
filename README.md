@@ -7,14 +7,15 @@ Our app uses Choo.js and is a single-page web application. For this reason, the 
 
 You may view the front-end Choo.js JavaScript application in the nt-choo directory.
 
-Another purpose of this application is to let you test the app locally, without using NPM or JavaScript. You can run "ruby service.rb" to start the application, although what it really is doing is loading the JavaScript bundle into your browser.
+One purpose of this application is to let you test the app locally, without using NPM or JavaScript. You can run "ruby service.rb" to start the application, although what it really is doing is loading the JavaScript bundle into your browser.
 
 Another thing is that services may not work properly unless the services are "woken up." In particular, the RabbitMQ services currently do not work properly unless you attempt to open them, and they fall asleep rather quickly. If the app is not behaving as expected, please open the following URLs to "wake up the bunnies":
 
-https://nt-rabbit-timeline.herokuapp.com
-https://nt-rabbit-writer.herokuapp.com
-https://nt-rabbitmq-follow.herokuapp.com
+- https://nt-rabbit-timeline.herokuapp.com
+- https://nt-rabbit-writer.herokuapp.com
+- https://nt-rabbitmq-follow.herokuapp.com
 
+There also is an intermittent rendering bug if you "refresh" the page. If the page appears to go "blank", try refreshing it again a few times.
 
 ![alt text](nanoTwitter.png)
 
@@ -134,13 +135,13 @@ Links to the tests:
 - [x] Follow writing service with RabbitMQ *(Performed by Alex)*
 - [x] Wrote unit tests. *(Performed by everyone)*
 
-### Version 0.9
+### Version 0.9, 1.0
 - [x] Finalize everything *(Performed by everyone)*
 - [x] Switched front end from AWS to heroku. *(Performed by Tom Willkens)*
 - [x] Optimized the bundle model for loading tests (cached the whole bundle) *(Performed by Tom Willkens and Zhengyang Zhou)*
 
 
-
+Maintainability Badge: <a href="https://codeclimate.com/github/Fantastic-Four124/eb-nanotwitter-main/maintainability%22%3E<img src="https://api.codeclimate.com/v1/badges/c112b1c388920bea651b/maintainability" /></a>
 
 
 
