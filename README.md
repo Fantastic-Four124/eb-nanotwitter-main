@@ -2,8 +2,11 @@
 Our Git repository for our CS105b project.
 ---------------
 
+## Portfolio Page
+https://fantastic-four124.github.io/index.html
+
 ## Important Notes
-Our app uses Choo.js and is a single-page web application. For this reason, the function of the "nanotwitter-main" application is simply to deliver the bundle.js. The app renders views on its own and communicates with the microservices in order to get data. Unit tests can be found in each of the microservice folders.
+Our front-end uses Choo.js and is a single-page web application. For this reason, the function of the "nanotwitter-main" application is simply to deliver the bundle.js. The app renders views on its own and communicates with the microservices in order to get data. Unit tests can be found in each of the microservice folders.
 
 You may view the front-end Choo.js JavaScript application in the nt-choo directory.
 
@@ -15,7 +18,7 @@ Another thing is that services may not work properly unless the services are "wo
 - https://nt-rabbit-writer.herokuapp.com
 - https://nt-rabbitmq-follow.herokuapp.com
 
-There also is an intermittent rendering bug if you "refresh" the page. If the page appears to go "blank", try refreshing it again a few times.
+There also is an intermittent rendering bug if you "refresh" the page. If the page appears to go "blank", try going to '/' and refreshing it again a few times.
 
 ![alt text](nanoTwitter.png)
 
