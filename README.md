@@ -2,6 +2,20 @@
 Our Git repository for our CS105b project.
 ---------------
 
+## Important Notes
+Our app uses Choo.js and is a single-page web application. For this reason, the function of the "nanotwitter-main" application is simply to deliver the bundle.js. The app renders views on its own and communicates with the microservices in order to get data. Unit tests can be found in each of the microservice folders.
+
+You may view the front-end Choo.js JavaScript application in the nt-choo directory.
+
+Another purpose of this application is to let you test the app locally, without using NPM or JavaScript. You can run "ruby service.rb" to start the application, although what it really is doing is loading the JavaScript bundle into your browser.
+
+Another thing is that services may not work properly unless the services are "woken up." In particular, the RabbitMQ services currently do not work properly unless you attempt to open them, and they fall asleep rather quickly. If the app is not behaving as expected, please open the following URLs to "wake up the bunnies":
+
+https://nt-rabbit-timeline.herokuapp.com
+https://nt-rabbit-writer.herokuapp.com
+https://nt-rabbitmq-follow.herokuapp.com
+
+<img src="nanotwitter.png">
 
 ## Change History
 ---------------

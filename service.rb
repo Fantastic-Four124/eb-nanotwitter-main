@@ -10,7 +10,6 @@ require 'bunny'
 require 'json'
 require 'rest-client'
 
-
 configure do
   TEST_INTERFACE_URL = 'https://fierce-garden-41263.herokuapp.com'
   PREFIX = 'api/v1'
@@ -23,20 +22,12 @@ configure do
   USERS = 'users'
 end
 
-
+# used for CORS, so that clients can get resources from other sources
 set :allow_origin, '*'
 set :allow_methods, 'GET,HEAD,POST'
 set :allow_headers, 'accept,content-type,if-modified-since'
 set :expose_headers, 'location,link'
 set :bind, '0.0.0.0' # Needed to work with Vagrant
-
-
-# Small helper that minimizes code
-helpers do
-  def protected! token
-    return !$redis.get(token).nil?
-  end
-end
 
 # For loader.io to auth
 get '/loaderio-5026e65eed1dbb67971ba6671d1760fe.txt' do
@@ -67,12 +58,18 @@ get '/78cc6f9c2e98cf61/bundle.js' do
   send_file '78cc6f9c2e98cf61/bundle.js'
 end
 
+#returns the bundle for the purposes of loader.io tests
 get '/bundle.js' do
   $bundle
 end
 
+# these replicate the experience of a user in choo for the 
+# main routes in the loader.io tests
+# see the microservices for real implementations
 get '/tweets/recent' do
-  #$redis_num = ($redis_num + 1) % 3
+  # we use three redis servers and randomly choose
+  # one to send our request for main tweets
+  # we use connection pool to reduce contention on redis connections
   redis_num = rand(3)
   case redis_num
   when 0
@@ -97,66 +94,19 @@ get '/tweets/recent' do
       end
     end
   end
+  # if tweets are not in redis, get from database
   url = TWEET_SERVICE_URL + '/' + PREFIX + '/' + TWEETS + '/' + RECENT
   RestClient.get url, {}
 end
 
-#post ''
-#end
-
-##get '/:token/users/:id/timeline' do
-##end
-##
-##get '/:token/users/:id/feed' do
-##end
-
-
-# TEST INTERFACE
-
-# Delete everything and recreate testuser
-post '/test/reset/all' do
-  response = RestClient.post TEST_INTERFACE_URL + '/test/reset/all', ''
-  response.body
-end
-
-# Load the test seed data
-post '/test/reset/standard?' do
-  response = RestClient.post TEST_INTERFACE_URL + '/test/reset/standard?', params
-  response.body
-end
-
-# See that the state is what you expect
-get '/test/status' do 
-  response = RestClient.get TEST_INTERFACE_URL + '/test/status'
-  response.body
-end 
-
-# create “u” new users, 10 tweets each
-post '/test/users/create?' do 
-  response = RestClient.post TEST_INTERFACE_URL + '/test/users/create?', params
-  response.body
-end
-
-# have testuser tweet “t” times
-post '/test/user/:user/tweets?' do  
-  user = params['user']
-  response = RestClient.post TEST_INTERFACE_URL + '/test/user/' + user + '/tweets?', params
-  response.body
-end
-
-# have f users follow testuser
-post '/test/user/:user/follows?' do
-  response = RestClient.post TEST_INTERFACE_URL + '/test/user/:user/follows?', params
-  response.body
-end
-
 get '/user/testuser' do
+  # same here, we cycle through our three redises to get
+  # the feed for a user
   redis_num = rand(2)
   case redis_num
   when 0
     $tweet_redis_1.with do |redis_conn|
       user_tweets = redis_conn.lrange("3456_feed", 0, -1)
-     # user_tweets = $tweet_redis_1.lrange("3456_feed", 0, -1)
       if user_tweets.length > 0
         return user_tweets.to_json
       end
@@ -164,7 +114,6 @@ get '/user/testuser' do
   when 1
     $tweet_redis_2.with do |redis_conn|
       user_tweets = redis_conn.lrange("3456_feed", 0, -1)
-     # user_tweets = $tweet_redis_2.lrange("3456_feed", 0, -1)
       if user_tweets.length > 0
         return user_tweets.to_json
       end
@@ -172,16 +121,17 @@ get '/user/testuser' do
   when 2
     $tweet_redis_3.with do |redis_conn|
       user_tweets = redis_conn.lrange("3456_feed", 0, -1)
-     # user_tweets = $tweet_redis_3.lrange("3456_feed", 0, -1)
       if user_tweets.length > 0
         return user_tweets.to_json
       end
     end
   end
+  # if not in redis, get from database
   response = RestClient.get(TWEET_SERVICE_URL + '/' + PREFIX + '/' + 'testuser/users/3456/feed')
   response.body
 end
 
+# posts a tweet
 post '/user/testuser/tweet' do
   jsonmsg = { "username": 'testuser', "id": 3456, "time": '', 'tweet-input': 'This is a test tweet!' }
   RestClient.post TWEET_WRITER_URL + '/testing/tweets/new', jsonmsg
