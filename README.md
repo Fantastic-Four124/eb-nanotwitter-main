@@ -15,7 +15,8 @@ https://nt-rabbit-timeline.herokuapp.com
 https://nt-rabbit-writer.herokuapp.com
 https://nt-rabbitmq-follow.herokuapp.com
 
-<img src="nanotwitter.png">
+
+![alt text](nanotwitter.png)
 
 ## Change History
 ---------------
