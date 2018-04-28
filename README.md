@@ -78,6 +78,10 @@ The following was added to version 0.5:
 
 - [x] We used loader.io for scalability tests on the main application and the services. *(Performed by everyone)*
 
+- [x] Started building follow service *(Alex)*
+
+- [x] Started building tweet service *(Cam)*
+
 Links to the tests:
  - Redis on Mongo Monolith, 100 client maintained load: https://ldr.io/2ILHqqk
  - Redis Mongo Test - Monolith - 250 client maintained load: https://ldr.io/2GTTODP
@@ -98,6 +102,29 @@ Links to the tests:
  - Choo Elastic Beanstalk Maintain Load 500 Users: https://ldr.io/2JDAhtr
  
  > A note on the follow tests from Alex: "I used RabbitMQ for interprocess communication. There is another thread constantly reading the queue and save it to db. However, the test result doesn't reflect the benefit from multi-threading. We will look into that."
+ 
+ The reason is client got initialized everytime. During initilization of the client, channels are estabilished. Therefore, we eventaully made the client as a global veriable.  *(Alex)*
+ 
+ 
+### Version 0.7
+
+- [x] Implementation of Choo front end *(Performed by Tom Willkens)*
+- [x] Implementaiion of Timeline *(Performed by Zhengyang Zhou)*
+
+### Version 0.8 
+- [x] INTERGRATION! Getting all servicecs coordinate. *(Performed by everyone)*
+- [x] Test interface with microservices  *(Performed by Alex)*
+- [x] Profolio page  *(Performed by Cam)*
+- [x] Tweet writing service with RabbitMQ *(Performed by Zhengyang Zhou)*
+- [x] Follow writing service with RabbitMQ *(Performed by Alex)*
+- [x] Wrote unit tests. *(Performed by everyone)*
+
+### Version 0.9
+- [x] Finalize everything *(Performed by everyone)*
+- [x] Switched front end from AWS to heroku. *(Performed by Tom Willkens)*
+- [x] Optimized the bundle model for loading tests (cached the whole bundle) *(Performed by Tom Willkens and Zhengyang Zhou)*
+
+
 
 
 
